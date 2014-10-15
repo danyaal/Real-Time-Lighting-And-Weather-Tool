@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: e0639683083fe4d658c1042785c7d48c
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - SnowPrefab: {fileID: 100000, guid: edda1624eb1cc48a9806dc7fafdf1f1b, type: 2}
+  - RainPrefab: {fileID: 100000, guid: 7db7abd93e0724dc3af7a1d91d0dddb8, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

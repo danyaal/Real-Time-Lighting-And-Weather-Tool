@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: b159469c854a7433e8cef26ba108705d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - RealTimeLightingPrefab: {fileID: 100000, guid: 86e6bfdb7aede4ecc8dc5b5224dfa62d,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
