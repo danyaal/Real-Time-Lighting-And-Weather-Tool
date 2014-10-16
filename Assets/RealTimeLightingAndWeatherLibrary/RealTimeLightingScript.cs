@@ -31,31 +31,10 @@ public class RealTimeLightingScript : MonoBehaviour {
 		}
 		
 		// Move sun in the sky
-		GameObject light = GameObject.FindGameObjectWithTag("lightsource");
-		if(hour > 7 && hour < 19) {
-			float direction = (hour-7f)*15f;
-			
-			transform.rotation = Quaternion.AngleAxis(direction, Vector3.right);
-		} else {
-			light.light.enabled = false;
-		}
+		MoveSun(hour);
 		
 		// Change light depending on scatter ray
-		Camera m = Camera.main.camera;
-		float red = 0f;
-		float green = 100f;
-		float blue = 150f;
-		if(hour >= 6 && hour <= 20) {
-			red = (150f/7f)*System.Math.Abs(hour-13);
-		} else {
-			red = 0f;
-			green = 50f;
-			blue = 100f;
-		}
-		Color c = new Color(red/255f, green/255f, blue/255f);
-		m.camera.backgroundColor = c;
-		m.camera.clearFlags = CameraClearFlags.SolidColor;
-
+		SimulateRayLeighScattering(hour);
 
 
 		/***********
@@ -85,5 +64,32 @@ public class RealTimeLightingScript : MonoBehaviour {
 		rainPos.y = 10f;
 		rainPos.z = Random.Range(-10, 10);
 		rain.transform.position = rainPos;
+	}
+
+	void MoveSun(int hour) {
+		GameObject light = GameObject.FindGameObjectWithTag("lightsource");
+		if(hour > 7 && hour < 19) {
+			float direction = (hour-7f)*15f;
+			this.transform.rotation = Quaternion.AngleAxis(direction, Vector3.right);
+		} else {
+			light.light.enabled = false;
+		}
+	}
+
+	void SimulateRayLeighScattering(int hour) {
+		Camera m = Camera.main.camera;
+		float red = 0f;
+		float green = 100f;
+		float blue = 150f;
+		if(hour >= 6 && hour <= 20) {
+			red = (150f/7f)*System.Math.Abs(hour-13);
+		} else {
+			red = 0f;
+			green = 50f;
+			blue = 100f;
+		}
+		Color c = new Color(red/255f, green/255f, blue/255f);
+		m.camera.backgroundColor = c;
+		m.camera.clearFlags = CameraClearFlags.SolidColor;
 	}
 }
