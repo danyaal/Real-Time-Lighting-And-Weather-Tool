@@ -14,7 +14,7 @@ public class Snow : MonoBehaviour {
 		pos.x = Random.Range(-1, 1);
 		this.transform.position += pos*Time.deltaTime;
 
-		if(Camera.main.WorldToViewportPoint(this.transform.position).y<0f) {
+		if(Camera.main.WorldToViewportPoint(this.transform.position).y < 0f) {
 			Destroy(this.gameObject);
 		}
 	}

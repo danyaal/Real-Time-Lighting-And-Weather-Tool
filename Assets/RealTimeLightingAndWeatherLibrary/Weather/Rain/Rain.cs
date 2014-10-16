@@ -10,7 +10,7 @@ public class Rain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Camera.main.WorldToViewportPoint(this.transform.position).y<0f) {
+		if(Camera.main.WorldToViewportPoint(this.transform.position).y < 0f) {
 			Destroy(this.gameObject);
 		}
 	}

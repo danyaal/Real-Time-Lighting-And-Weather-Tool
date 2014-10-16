@@ -3,9 +3,10 @@ using System.Collections;
 
 public class RealTimeLightingScript : MonoBehaviour {
 
-	public bool isWeatherOn = true;
+	public bool isWeatherOn = false;
 	public bool DebugRain = false;
 	public bool DebugSnow = false;
+
 	public GameObject SnowPrefab;
 	public GameObject RainPrefab;
 	
@@ -19,19 +20,9 @@ public class RealTimeLightingScript : MonoBehaviour {
 		// Set season
 		if(isWeatherOn) {
 			if(month == 12 || month == 1 || month == 2) {
-				GameObject snow = Instantiate(SnowPrefab) as GameObject;
-				Vector3 snowPos = Vector3.zero;
-				snowPos.x = Random.Range(-10, 10);
-				snowPos.y = 10f;
-				snowPos.z = Random.Range(-10, 10);
-				snow.transform.position = snowPos;
+				Snow();
 			} else if(month == 3 || month == 4 || month == 5) {
-				GameObject rain = Instantiate(RainPrefab) as GameObject;
-				Vector3 rainPos = Vector3.zero;
-				rainPos.x = Random.Range(-10, 10);
-				rainPos.y = 10f;
-				rainPos.z = Random.Range(-10, 10);
-				rain.transform.position = rainPos;
+				Rain();
 			} else if(month == 6 || month == 7 || month == 8) {
 				// summer
 			} else {
@@ -52,13 +43,14 @@ public class RealTimeLightingScript : MonoBehaviour {
 		// Change light depending on scatter ray
 		Camera m = Camera.main.camera;
 		float red = 0f;
-		float green = 150f;
-		float blue = 200f;
-		if(hour >= 6 || hour <= 20) {
-			red = 150f - (150f/7f)*System.Math.Abs(hour-13);
+		float green = 100f;
+		float blue = 150f;
+		if(hour >= 6 && hour <= 20) {
+			red = (150f/7f)*System.Math.Abs(hour-13);
 		} else {
-			red = 50f;
+			red = 0f;
 			green = 50f;
+			blue = 100f;
 		}
 		Color c = new Color(red/255f, green/255f, blue/255f);
 		m.camera.backgroundColor = c;
@@ -70,20 +62,28 @@ public class RealTimeLightingScript : MonoBehaviour {
 		 * Debug   *
 		 * *********/
 		if(DebugRain) {
-			GameObject rain = Instantiate(RainPrefab) as GameObject;
-			Vector3 rainPos = Vector3.zero;
-			rainPos.x = Random.Range(-10, 10);
-			rainPos.y = 10f;
-			rainPos.z = Random.Range(-10, 10);
-			rain.transform.position = rainPos;
+			Rain ();
 		} else if(DebugSnow) {
-			GameObject snow = Instantiate(SnowPrefab) as GameObject;
-			Vector3 snowPos = Vector3.zero;
-			snowPos.x = Random.Range(-10, 10);
-			snowPos.y = 10f;
-			snowPos.z = Random.Range(-10, 10);
-			snow.transform.position = snowPos;
+			Snow();
 		}
 
+	}
+
+	void Snow() {
+		GameObject snow = Instantiate(SnowPrefab) as GameObject;
+		Vector3 snowPos = Vector3.zero;
+		snowPos.x = Random.Range(-10, 10);
+		snowPos.y = 10f;
+		snowPos.z = Random.Range(-10, 10);
+		snow.transform.position = snowPos;
+	}
+
+	void Rain() {
+		GameObject rain = Instantiate(RainPrefab) as GameObject;
+		Vector3 rainPos = Vector3.zero;
+		rainPos.x = Random.Range(-10, 10);
+		rainPos.y = 10f;
+		rainPos.z = Random.Range(-10, 10);
+		rain.transform.position = rainPos;
 	}
 }
